@@ -15,16 +15,10 @@ var skills=["HTML", "CSS", "Bootstraps", "Excel", "Word", "Javascript"];
 
 
 var bio = {
-    "contacts": [
-           {
             "name" : "Darren Sexton",
             "age" : "44",
             "location" : "Cincinnati, Oh",
-            "skills" : skills
-           }
-    ]
-        
-              
+            "skills" : skills             
     
   };
 
