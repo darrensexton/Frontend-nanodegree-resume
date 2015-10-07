@@ -13,6 +13,22 @@
   padding-right: 5%;
 }
 
+.project-entry {
+  
+  width: 33.33333333%;
+  position: relative;
+  min-height: 1px;
+  text-align:center;
+}
+@media (min-width: 992px) {
+  .project-entry {
+    float: left;
+    }
+    
+  }
+  
+
+
 h1 {
   font-size: 40px;
   color: #F5A623;
@@ -54,7 +70,7 @@ h2, h3, h4, h5 {
   font-size: 14px;
   color: #999999;
   line-height: 16px;
-  float: left;
+  text-align: center;
 }
 
 .location-text {
@@ -81,13 +97,13 @@ a {
 
 .welcome-message {
   font-style: italic;
-  font-size: 18px;
-  color: #F3F3F3;
+  font-size: 20px;
+  color: #170B35;
   line-height: 28px;
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  color: #F84525;
   display: none;
 }
 
@@ -114,10 +130,14 @@ a {
   background-color: #4A4A4A;
 }
 
+
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+ /*background-color: #484848; */
+ background-image: url("tech.jpg");
 }
+
+
 
 .flex-box {
   display: -webkit-flex;
@@ -213,3 +233,4 @@ span {
     display: block;
   }
 }
+
