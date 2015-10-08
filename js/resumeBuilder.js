@@ -1,30 +1,16 @@
-var role="Web Developer";
-var name="Darren Sexton";
-var bioPic="images/profile.jpg";
-var welcome="Welcome to my online resume. Feel free to contact me with any questions you may have.";
-
-var formattedName = HTMLheaderName.replace("%data%", name);
-var formattedRole = HTMLheaderRole.replace("%data%", role);
-var formattedbioPic = HTMLbioPic.replace("%data%", bioPic);
-var formattedwelcomeMsg = HTMLWelcomeMsg.replace("%data%", welcome);
-
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName); 
-$("#header").prepend(formattedbioPic);
-$("#header").append(formattedwelcomeMsg);
-
-var skills=["HTML", "CSS", "Bootstraps", "Excel", "Word", "Javascript"];
-
-
-
-var bio = {
+var bio = {    
             "name" : "Darren Sexton",
-            "age" : "44",
-            "location" : "1246 Thurnridge Dr. Cincinnati, Oh, 45215",
-            "skills" : skills             
-    
-  };
-
+            "role": "Web Developer",
+            "bioPic" : "images/profile.jpg",
+            "welcome" : "Welcome to my online resume. Feel free to contact me with any questions you may have.",
+            "skills" : ["HTML", "CSS", "Bootstraps", "Excel", "Word", "Javascript"],
+            "contacts" : {
+                "email" : "<a href='mailto:darrensexton01@gmail.com'>Darrensexton01@gmail.com</a>",
+                "address" : "<a href='http://maps.google.com/?q=1246 thurnridge dr., cincinnati, oh, 45215' target='blank'>1246 Thurnridge Dr., Cincinnati, OH</a>",
+                "mobile" : "<a href='callto://15138840937'>513-884-0937</a>",
+                "linked" : "<a href='https://www.linkedin.com/profile/view?id=AAIAAAsOyp8B0oyL_vj-ChX8SEU8-VXIrN_TdB4&trk=nav_responsive_tab_profile' target='blank' >LinkedIn</a>"
+            }                 
+};
 
 var education = {
     "schools": [
@@ -86,7 +72,6 @@ var work = {
     ]
 };
 
-
 var projects = {
     "projects": [
         {
@@ -114,36 +99,45 @@ var projects = {
     
 };
 
-var email = "<a href='mailto:darrensexton01@gmail.com'>Darrensexton01@gmail.com</a>";
-var mobile = "<a href='callto://15138840937'>513-884-0937</a>";
-var address = "<a href='http://maps.google.com/?q=1246 thurnridge dr., cincinnati, oh, 45215' target='blank'>1246 Thurnridge Dr., Cincinnati, OH</a>";
-var linked = "<a href='https://www.linkedin.com/profile/view?id=AAIAAAsOyp8B0oyL_vj-ChX8SEU8-VXIrN_TdB4&trk=nav_responsive_tab_profile' target='blank' >LinkedIn</a>";
-
-var formattedMobile = HTMLmobile.replace("%data%", mobile);
-var formattedEmail = HTMLemail.replace("%data%", email);
-var formattedLocation = HTMLlocation.replace("%data%", address);
-var formattedlinkedIn = HTMLlinkedIn.replace("%data%", linked);
-
-
-
-
-
- $("#header").append(HTMLskillsStart);
-
-for(skill in skills) {
+bio.display = function() {
+    
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    var formattedbioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+    var formattedwelcomeMsg = HTMLWelcomeMsg.replace("%data%", bio.welcome);
+    var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+    var formattedEmail = HTMLemail.replace("%data%",bio.contacts. email);
+    var formattedLocation = HTMLlocation.replace("%data%", bio.contacts.address);
+    var formattedlinkedIn = HTMLlinkedIn.replace("%data%", bio.contacts.linked);
+    
+    
+    
+    $("#header").prepend(formattedRole);
+    $("#header").prepend(formattedName); 
+    $("#header").prepend(formattedbioPic);
+    $("#header").append(formattedwelcomeMsg);
+    $("#header").append(HTMLskillsStart);
+    
+    for(var skill in bio.skills) {
    
-     
-    var formattedSkill = HTMLskills.replace("%data%",skills[skill]);
+        var formattedSkill = HTMLskills.replace("%data%",bio.skills[skill]);
     
     $("#skills").append(formattedSkill);
     
+    };
+    
+    $("#footerContacts").append (formattedMobile);
+    $("#footerContacts").append (formattedEmail);
+    $("#footerContacts").append (formattedlinkedIn);
+    $("#footerContacts").append (formattedLocation);
+    
 };
 
-
+bio.display();
 
 work.display = function(){
 
-    for(job in work.jobs) {
+    for(var job in work.jobs) {
         $("#workExperience").append(HTMLworkStart);
     
         var formattedEmployers = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
@@ -161,10 +155,10 @@ work.display = function(){
     }
 };
 
-$("#workExperience").append(work.display);
+work.display();
 
 projects.display = function() {
-    for(project in projects.projects) {
+    for(var project in projects.projects) {
         $("#projects").append(HTMLprojectStart);
         
         var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
@@ -181,10 +175,11 @@ projects.display = function() {
         
     }
 };
-$("#projects").append(projects.display);
+
+projects.display();
 
 education.display = function() {
-    for(school in education.schools) {
+    for(var school in education.schools) {
         
        $("#education").append(HTMLschoolStart);
        
@@ -199,16 +194,12 @@ education.display = function() {
        $(".education-entry:last").append(formattedschoolLocation);
        $(".education-entry:last").append(formattedschoolMajor);
     }
-}
+};
 
-$("#education").append(education.display);
+/*$("#education").append(education.display); */
+education.display();
 
 $("#mapDiv").append(googleMap);
-
-$("#footerContacts").append (formattedMobile);
-$("#footerContacts").append (formattedEmail);
-$("#footerContacts").append (formattedlinkedIn);
-$("#footerContacts").append (formattedLocation);
 
 $(document).click(function(loc) {
     var x = loc.pageX;
